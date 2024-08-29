@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.SystemClock
-import android.util.Log
 import com.morvaibarnaerp.OCRWrapperTest.Metadata.extractNamesFromMetadata
-//import com.example.ttocrapp.MetaData.extractNamesFromLabelFile
-//import com.example.ttocrapp.MetaData.extractNamesFromMetadata
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.CompatibilityList
@@ -52,7 +49,6 @@ class Detector(
 
     private var success = false
     private var value: String = ""
-
 
 
     private val imageProcessor = ImageProcessor.Builder()
@@ -264,14 +260,13 @@ class Detector(
                     }
                 }
                 if (countOfMeasure == 5) {
-
                     if (mostFrequentStringWithPercentage(ocrResults) != null){
                         success = true
                         value = mostFrequentStringWithPercentage(ocrResults)?.first.toString()
                         result = "$value kWh"
                         resultPercentage =
                             mostFrequentStringWithPercentage(ocrResults)?.second.toString() + "%"
-                        Log.e("kwh",value)
+//                        Log.e("kwh",value)
                     }
                     else {
                         success = false
@@ -279,7 +274,7 @@ class Detector(
                         resultPercentage = ""
                     }
                 } else if (countOfMeasure < 5) {
-                    result = "Kísérlet: $countOfMeasure"
+//                    Log.e("Kísérlet", countOfMeasure.toString())
                 }
             }
         }

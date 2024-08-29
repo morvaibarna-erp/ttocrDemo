@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Rect
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -36,10 +37,6 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
     }
 
     private fun initPaints() {
-        textBackgroundPaint.color = Color.BLACK
-        textBackgroundPaint.style = Paint.Style.FILL
-        textBackgroundPaint.textSize = 50f
-
         textPaint.color = Color.WHITE
         textPaint.style = Paint.Style.FILL
         textPaint.textSize = 50f
@@ -48,68 +45,24 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
         boxPaint.strokeWidth = 8F
         boxPaint.style = Paint.Style.STROKE
 
-        rectColor.color = ContextCompat.getColor(context!!, R.color.red)
-        rectColor.strokeWidth = 8F
-        rectColor.style = Paint.Style.STROKE
     }
 
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
 
-//        canvas.let {
-//            val centerX = width / 2
-//            val centerY = height / 2
-//            val rectWidth = width * 0.8f
-//            val rectHeight = height * 0.8f
-//
-//            val rect = Rect(
-//                (centerX - rectWidth / 2).toInt(),
-//                (centerY - rectHeight / 2).toInt(),
-//                (centerX + rectWidth / 2).toInt(),
-//                (centerY + rectHeight / 2).toInt()
-//            )
-//
-//            it.drawRect(rect, rectColor)
-//        }
-
-        // Calculate the maximum rectangle size that fits within the view bounds
-//        val viewWidth = width * 0.9f
-//        val viewHeight = height.toFloat()
-//        val viewAspectRatio = viewWidth / viewHeight
-//        val rectAspectRatio = ratioW.toFloat() / ratioH.toFloat()
-//
-//        val rectWidth: Float
-//        val rectHeight: Float
-//
-//        if (rectAspectRatio > viewAspectRatio) {
-//            // Rectangle is wider than the view, match width and adjust height
-//            rectWidth = viewWidth
-//            rectHeight = viewWidth / rectAspectRatio
-//        } else {
-//            // Rectangle is taller than the view, match height and adjust width
-//            rectHeight = viewHeight
-//            rectWidth = viewHeight * rectAspectRatio
-//        }
-//
-//        // Calculate the top-left corner to center the rectangle
-//        val left = (viewWidth - rectWidth) / 2
-//        val top = (viewHeight - rectHeight) / 2
-//
-//        // Draw the rectangle
-//        canvas.drawRect(left, top, left + rectWidth, top + rectHeight, rectColor)
-
         results.forEach {
-            val left = it.x1 * width
-            val top = it.y1 * height
-            val right = it.x2 * width
-            val bottom = it.y2 * height
-
-            canvas.drawRect(left, top, right, bottom, boxPaint)
-            val drawableText = (round(it.cnf * 100)).toString() + "%"
-
-            textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
-
-            canvas.drawText(drawableText, left, top - bounds.height(), textPaint)
+            val left = it.x1 * width - it.x1 * 50f
+            val top = it.y1 * height - it.y1 * 50f
+            val right = it.x2 * width + it.x2 * 50f
+            val bottom = it.y2 * height + it.y2 * 50f
+            val borderRadius = 30f
+            val rect = RectF(left, top, right, bottom)
+            canvas.drawRoundRect(rect, borderRadius, borderRadius, boxPaint)
+//            val drawableText = (round(it.cnf * 100)).toString() + "%"
+//
+//            textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
+//
+//            canvas.drawText(drawableText, left, top - bounds.height(), textPaint)
 
         }
     }

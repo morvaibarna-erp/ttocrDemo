@@ -2,19 +2,13 @@ package com.morvaibarnaerp.OCRWrapperTest
 
 // replace with your package
 
-import android.util.Log
-import android.view.Choreographer
-import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
-import com.facebook.react.uimanager.annotations.ReactPropGroup
+import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.facebook.react.uimanager.events.RCTModernEventEmitter
+
 
 class OCRViewManager(reactContext: ReactApplicationContext) : SimpleViewManager<OCRView>() {
 
@@ -28,7 +22,18 @@ class OCRViewManager(reactContext: ReactApplicationContext) : SimpleViewManager<
     }
 
     override fun createViewInstance(reactContext: ThemedReactContext): OCRView {
-        return OCRView(reactContext)
+        val view = OCRView(reactContext)
+        return view
+    }
+
+    override fun getExportedCustomBubblingEventTypeConstants(): Map<String, Any> {
+        return mapOf(
+            "topChange" to mapOf(
+                "phasedRegistrationNames" to mapOf(
+                    "bubbled" to "onChange"
+                )
+            )
+        )
     }
 
     @ReactProp(name="heightRatio")
@@ -39,8 +44,14 @@ class OCRViewManager(reactContext: ReactApplicationContext) : SimpleViewManager<
     fun setRatioW(view:OCRView, value:Int){
         view.setRatioW(value)
     }
+    @ReactProp(name="ocrTimeOut")
+    fun setOcrTimeOut(view:OCRView, value:Int){
+        view.setOcrTimeOut(value*1000)
+        view.setScannerTimeOut(value*1000)
+    }
+
     @ReactProp(name = "expectedBarCode")
-    fun setExpectedBarCode(view: OCRView,value: String){
+    fun setExpectedBarCode(view: OCRView, value: String) {
         view.setExpectedBarCode(value)
     }
 }

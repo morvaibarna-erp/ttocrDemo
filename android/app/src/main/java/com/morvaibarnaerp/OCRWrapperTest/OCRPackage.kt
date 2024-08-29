@@ -8,9 +8,9 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
 class OCRPackage : ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
-        return emptyList()
-    }
+    override fun createNativeModules(
+        reactContext: ReactApplicationContext
+    ): MutableList<NativeModule> = listOf(OCRViewManager(reactContext)).toMutableList()
 
     override fun createViewManagers(
         reactContext: ReactApplicationContext

@@ -1,57 +1,36 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, NativeModules, Button } from "react-native";
-import { MyView } from "./MyView";
-import { PermissionsAndroid } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React, { useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomePage from "./HomePage";
+import CameraPage from "./CameraPage";
+import FinalPage from "./FinalPage";
+import { StatusBar } from "expo-status-bar";
 
-async function requestCameraPermission() {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-      {
-        title: "Camera Permission",
-        message: "App needs camera access",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK",
-      }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("Camera permission granted");
-    } else {
-      console.log("Camera permission denied");
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-}
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const onPress = () => {
-    OCRModule.createOCREvent("testName");
-  };
-  useEffect(() => {
-    requestCameraPermission();
-  }, []);
   return (
-    <View style={styles.container}>
-      {/* <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-      <Button
-        title="Click to invoke your native module!"
-        color="#841584"
-        onPress={onPress}
-      /> */}
-      <MyView />
-    </View>
+    <NavigationContainer>
+      <StatusBar />
+
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{ title: "Mérőóra leolvasó Android Demo" }}
+        />
+        <Stack.Screen
+          name="Camera"
+          component={CameraPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Result"
+          component={FinalPage}
+          options={{ title: "Eredmény" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

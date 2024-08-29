@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Horizontal line of the X -->
+    <item>
+        <rotate
+            android:fromDegrees="45"
+            android:toDegrees="45"
+            android:pivotX="50%"
+            android:pivotY="50%">
+            <shape
+                android:shape="rectangle">
+                <corners android:radius="10dp" />
+                <size
+                    android:width="4dp"
+                    android:height="100dp" /> <!-- Adjust width and height as needed -->
+                <solid android:color="#FFFFFF"/> <!-- White color -->
+            </shape>
+        </rotate>
+    </item>
+
+    <!-- Vertical line of the X -->
+    <item>
+        <rotate
+            android:fromDegrees="-45"
+            android:toDegrees="-45"
+            android:pivotX="50%"
+            android:pivotY="50%">
+            <shape
+                android:shape="rectangle">
+                <corners android:radius="10dp" />
+                <size
+                    android:width="10dp"
+                    android:height="100dp" /> <!-- Adjust width and height as needed -->
+                <solid android:color="#FFFFFF"/> <!-- White color -->
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>
