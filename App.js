@@ -16,17 +16,25 @@ export default function App() {
         <Stack.Screen
           name="Home"
           component={HomePage}
-          options={{ title: "Mérőóra leolvasó Android Demo" }}
+          options={{
+            title: "Mérőóra leolvasó Android Demo",
+            statusBarStyle: "dark",
+          }}
         />
         <Stack.Screen
           name="Camera"
           component={CameraPage}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="Result"
           component={FinalPage}
-          options={{ title: "Eredmény" }}
+          options={{
+            title: "Eredmény",
+            statusBarStyle: "dark",
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

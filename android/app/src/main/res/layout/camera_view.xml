@@ -94,7 +94,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_check"
+                        android:src="@drawable/checkmark"
                 android:visibility="invisible" />
 
             <ImageView
@@ -179,7 +179,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_check"
+                        android:src="@drawable/checkmark"
                         android:visibility="invisible" />
 
                     <ImageView
@@ -207,13 +207,13 @@
                     android:layout_gravity="start"
                     android:fontFamily="monospace"
                     android:gravity="center"
-                    android:text="Mérő állás:"
+                    android:text="Mérő állás leolvasása"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/kwhValue"
-                    android:layout_width="134dp"
+                    android:layout_width="48dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
                     android:fontFamily="monospace"
@@ -242,7 +242,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_check"
+                                android:src="@drawable/checkmark"
                         android:visibility="invisible" />
 
                     <ImageView
@@ -256,8 +256,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-        <!-- Text inside the capsule -->
 
 
     </LinearLayout>

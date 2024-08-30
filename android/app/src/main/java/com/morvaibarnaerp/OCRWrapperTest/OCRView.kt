@@ -217,29 +217,7 @@ class OCRView(
             isTorchOn = !isTorchOn
 
 
-//                            val file = File(
-//                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-//                                (0..1000).random().toString() + ".jpg"
-//                            )
-//                            if (!file.exists()) {
-//                                try {
-//                                    FileOutputStream(file).use { out ->
-//                                        rotatedBitmap.compress(
-//                                            Bitmap.CompressFormat.JPEG, 100, out
-//                                        )
-//                                        out.flush()
-//                                        out.close()
-//                                    }
-//                                    Log.e("file", file.toString())
 //
-//                                    val dataToSend: WritableMap = Arguments.createMap()
-//                                    dataToSend.putString("savedImagePath", file.toString())
-//                                    dataToSend.putString("allas", value)
-////                                    sendEventToReactNative("displayHit", dataToSend)
-//                                } catch (e: IOException) {
-//                                    e.printStackTrace()
-//                                }
-//                            }
 
         }
 
@@ -363,13 +341,31 @@ class OCRView(
                     detector?.setSuccess(false)
                     var value = detector?.getResult()
                     if (value != null) {
-
                         showTick(3)
-                        runOnUiThread {
-                            kwhValue.text = value + " kWh"
-                            toast("Készítsen fényképet!")
-                        }
+                        
+                        val file = File(
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                            (0..1000).random().toString() + ".jpg"
+                        )
+                        if (!file.exists()) {
+                            try {
+                                FileOutputStream(file).use { out ->
+                                    rotatedBitmap.compress(
+                                        Bitmap.CompressFormat.JPEG, 100, out
+                                    )
+                                    out.flush()
+                                    out.close()
+                                }
+                                Log.e("file", file.toString())
 
+                                val dataToSend: WritableMap = Arguments.createMap()
+                                dataToSend.putString("savedImagePath", file.toString())
+                                dataToSend.putString("allas", value)
+                                sendEventToReactNative("displayHit", dataToSend)
+                            } catch (e: IOException) {
+                                e.printStackTrace()
+                            }
+                        }
 
                     }
                     overlay.clear()
