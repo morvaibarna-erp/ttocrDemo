@@ -4,6 +4,7 @@ import {
   NativeModules,
   PermissionsAndroid,
   NativeEventEmitter,
+  StatusBar,
 } from "react-native";
 import { React, useEffect } from "react";
 import { CameraView } from "./CameraView";
@@ -35,7 +36,7 @@ const CameraPage = ({ navigation, route }) => {
     const subscription2 = nativeEventEmitter.addListener(
       "NoBarCode",
       (event) => {
-        navigation.navigate("Home");
+        navigation.goBack();
       }
     );
 
@@ -45,17 +46,29 @@ const CameraPage = ({ navigation, route }) => {
     };
   }, []);
 
-  useEffect(() => {
-    requestPermission();
-  }, []);
+  // useEffect(() => {
+  //   StatusBar.setBarStyle("light");
+  //   requestPermission();
+  // }, []);
 
   return (
-    <CameraView
-      gyariSzam={gyariSzam}
-      heightRatio={heightRatio}
-      widthRatio={widthRatio}
-      ocrTimeOut={ocrTimeOut}
-    />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "black",
+      }}
+    >
+      {/* <StatusBar barStyle={"light-content"} style="dark" /> */}
+
+      <CameraView
+        gyariSzam={gyariSzam}
+        heightRatio={heightRatio}
+        widthRatio={widthRatio}
+        ocrTimeOut={ocrTimeOut}
+      />
+    </View>
   );
 };
 

@@ -13,8 +13,10 @@ const HomePage = ({ navigation }) => {
   const [heightRatio, setHeightRatio] = useState("1");
   const [widthRatio, setWidthRatio] = useState("1");
   const [ocrTimeOut, setOcrTimeOut] = useState("10");
+
   return (
     <View style={styles.container}>
+      {/* <StatusBar barStyle={"dark-content"} backgroundColor={"white"} /> */}
       <View style={{ alignItems: "center" }}>
         <Text>Gyári szám:</Text>
         <TextInput

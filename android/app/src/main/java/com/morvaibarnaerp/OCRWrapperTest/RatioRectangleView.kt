@@ -42,7 +42,7 @@ class RatioRectangleView @JvmOverloads constructor(
     private var left: Float = 0f
     private var top: Float = 0f
     private val cornerLength = 150f // Length of the corner segments
-    private val borderRadius = 30f // Radius for rounded corners
+    private val borderRadius = 70f // Radius for rounded corners
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)

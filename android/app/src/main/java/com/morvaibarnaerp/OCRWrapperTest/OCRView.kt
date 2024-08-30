@@ -22,6 +22,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -104,8 +105,8 @@ class OCRView(
     private var kwhValue: TextView
     private var capsuleText: TextView
 
-    private var cameraButton: Button
-//    private var animation: Animation
+    private var torchButton: ImageButton
+    private var isTorchOn: Boolean = false
     private var closeButton: FrameLayout
 
 
@@ -167,7 +168,7 @@ class OCRView(
         barCodeValue = findViewById(R.id.barCodeValue)
         kwhValue = findViewById(R.id.kwhValue)
 
-        cameraButton = findViewById(R.id.captureButton)
+        torchButton = findViewById(R.id.torchButton)
         closeButton = findViewById(R.id.closeButton)
 
         closeButton.setOnClickListener() {
@@ -189,8 +190,58 @@ class OCRView(
             sendEventToReactNative("NoBarCode", dataToSend)
         }
 
+        torchButton.setOnClickListener {
+
+            if (camera!!.cameraInfo.hasFlashUnit() and !isTorchOn) {
+                camera!!.cameraControl.enableTorch(true)
+            } else {
+                camera!!.cameraControl.enableTorch(false)
+            }
+            runOnUiThread {
+                torchButton.animate().apply {
+                    duration = 50
+                    scaleX(0.8f)
+                    scaleY(0.8f)
+                }.withEndAction {
+                    torchButton.animate().apply {
+                        duration = 50
+                        scaleX(1f)
+                        scaleY(1f)
+                    }
+                }.start()
+                if (isTorchOn) {
+                    torchButton.setImageResource(R.drawable.flashlight_off)
+                } else
+                    torchButton.setImageResource(R.drawable.flashlight_on)
+            }
+            isTorchOn = !isTorchOn
 
 
+//                            val file = File(
+//                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+//                                (0..1000).random().toString() + ".jpg"
+//                            )
+//                            if (!file.exists()) {
+//                                try {
+//                                    FileOutputStream(file).use { out ->
+//                                        rotatedBitmap.compress(
+//                                            Bitmap.CompressFormat.JPEG, 100, out
+//                                        )
+//                                        out.flush()
+//                                        out.close()
+//                                    }
+//                                    Log.e("file", file.toString())
+//
+//                                    val dataToSend: WritableMap = Arguments.createMap()
+//                                    dataToSend.putString("savedImagePath", file.toString())
+//                                    dataToSend.putString("allas", value)
+////                                    sendEventToReactNative("displayHit", dataToSend)
+//                                } catch (e: IOException) {
+//                                    e.printStackTrace()
+//                                }
+//                            }
+
+        }
 
         ratioRectangleView.invalidate()
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -319,52 +370,10 @@ class OCRView(
                             toast("Készítsen fényképet!")
                         }
 
-                        cameraButton.setOnClickListener {
-
-                            runOnUiThread {
-                                cameraButton.animate().apply {
-                                    duration = 50
-                                    scaleX(0.8f)
-                                    scaleY(0.8f)
-                                }.withEndAction {
-                                    cameraButton.animate().apply {
-                                        duration = 50
-                                        scaleX(1f)
-                                        scaleY(1f)
-                                    }
-                                }.start()
-                            }
-
-                            val file = File(
-                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                                (0..1000).random().toString() + ".jpg"
-                            )
-                            if (!file.exists()) {
-                                try {
-                                    FileOutputStream(file).use { out ->
-                                        rotatedBitmap.compress(
-                                            Bitmap.CompressFormat.JPEG, 100, out
-                                        )
-                                        out.flush()
-                                        out.close()
-                                    }
-                                    Log.e("file", file.toString())
-
-                                    val dataToSend: WritableMap = Arguments.createMap()
-                                    dataToSend.putString("savedImagePath", file.toString())
-                                    dataToSend.putString("allas", value)
-                                    sendEventToReactNative("displayHit", dataToSend)
-                                } catch (e: IOException) {
-                                    e.printStackTrace()
-                                }
-                            }
-
-                        }
-
-                        overlay.clear()
-                        success = true
 
                     }
+                    overlay.clear()
+                    success = true
                 } else {
                     detector?.detect(rotatedBitmap)
                 }
@@ -408,6 +417,7 @@ class OCRView(
                     camera = cameraProvider.bindToLifecycle(
                         lifecycleOwner, cameraSelector, preview, imageAnalyzer
                     )
+
                 }
 //            preview?.setSurfaceProvider(viewFinder.surfaceProvider)
             }

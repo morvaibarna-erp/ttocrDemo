@@ -1,19 +1,17 @@
-import { StyleSheet, View } from "react-native";
-import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomePage from "./HomePage";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
 import CameraPage from "./CameraPage";
 import FinalPage from "./FinalPage";
-import { StatusBar } from "expo-status-bar";
+import HomePage from "./HomePage";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <StatusBar />
-
+      <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"

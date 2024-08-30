@@ -262,9 +262,6 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="347dp"
         android:layout_height="130dp"
@@ -283,12 +280,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp">
 
-            <Button
-                android:id="@+id/captureButton"
+            <ImageButton
+                android:id="@+id/torchButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_camera"
+                android:src="@drawable/flashlight_on"
+                android:padding="15dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:importantForAccessibility="yes"

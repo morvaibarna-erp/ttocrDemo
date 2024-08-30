@@ -2,9 +2,9 @@
 
     <item>
         <shape android:shape="rectangle">
-            <size android:height="5dp" android:width="5dp"/>
+            <size android:height="70dp" android:width="70dp"/>
             <corners android:radius="100dp" /> <!-- Rounded corners for the capsule -->
-            <solid android:color="#DD0000" /> <!-- Background color of the capsule -->
+            <solid android:color="#FFA41A" /> <!-- Background color of the capsule -->
         </shape>
     </item>
 

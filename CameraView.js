@@ -35,11 +35,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cameraContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+    backgroundColor: "black",
   },
   camera: {
     flex: 1,
