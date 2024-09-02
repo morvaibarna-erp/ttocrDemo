@@ -46,10 +46,9 @@ const CameraPage = ({ navigation, route }) => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   StatusBar.setBarStyle("light");
-  //   requestPermission();
-  // }, []);
+  useEffect(() => {
+    requestPermission();
+  }, []);
 
   return (
     <View

@@ -247,7 +247,6 @@ class OCRView(
     private fun toast(message: String) {
         runOnUiThread {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-
         }
     }
 

@@ -8,8 +8,9 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 
-const HomePage = ({ navigation }) => {
-  const [gyariSzam, setGyariSzam] = useState("440011700485475");
+const HomePage = ({ navigation, route }) => {
+  const { gyariSzamRoute } = route.params;
+  const [gyariSzam, setGyariSzam] = useState(gyariSzamRoute);
   const [heightRatio, setHeightRatio] = useState("1");
   const [widthRatio, setWidthRatio] = useState("1");
   const [ocrTimeOut, setOcrTimeOut] = useState("10");

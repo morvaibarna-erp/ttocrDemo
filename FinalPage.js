@@ -15,19 +15,10 @@ const deleteImage = (path) => {
 
   RNFS.exists(filepath)
     .then((result) => {
-      console.log("file exists: ", result);
-
       if (result) {
-        return (
-          RNFS.unlink(filepath)
-            .then(() => {
-              console.log("FILE DELETED");
-            })
-            // `unlink` will throw an error, if the item to unlink does not exist
-            .catch((err) => {
-              console.log(err.message);
-            })
-        );
+        return RNFS.unlink(filepath).catch((err) => {
+          console.log(err.message);
+        });
       }
     })
     .catch((err) => {
@@ -65,10 +56,17 @@ const FinalPage = ({ route, navigation }) => {
               title="Újra"
               color={"#ff804e"}
               onPress={() => {
-                deleteImage.bind(this, savedImagePath);
+                deleteImage(savedImagePath);
                 navigation.reset({
                   index: 0,
-                  routes: [{ name: "Home" }],
+                  routes: [
+                    {
+                      name: "Home",
+                      params: {
+                        gyariSzamRoute: gyariSzam,
+                      },
+                    },
+                  ],
                 });
               }}
             />
@@ -77,10 +75,17 @@ const FinalPage = ({ route, navigation }) => {
               title="Elfogadás (kép törlése)"
               color={"#04c01d"}
               onPress={() => {
-                deleteImage.bind(this, savedImagePath);
+                deleteImage(savedImagePath);
                 navigation.reset({
                   index: 0,
-                  routes: [{ name: "Home" }],
+                  routes: [
+                    {
+                      name: "Home",
+                      params: {
+                        gyariSzamRoute: gyariSzam,
+                      },
+                    },
+                  ],
                 });
               }}
             />

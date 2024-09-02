@@ -11,6 +11,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar />
       <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
@@ -18,8 +19,8 @@ export default function App() {
           component={HomePage}
           options={{
             title: "Mérőóra leolvasó Android Demo",
-            statusBarStyle: "dark",
           }}
+          initialParams={{ gyariSzamRoute: "440011700485475" }}
         />
         <Stack.Screen
           name="Camera"
@@ -33,7 +34,6 @@ export default function App() {
           component={FinalPage}
           options={{
             title: "Eredmény",
-            statusBarStyle: "dark",
           }}
         />
       </Stack.Navigator>

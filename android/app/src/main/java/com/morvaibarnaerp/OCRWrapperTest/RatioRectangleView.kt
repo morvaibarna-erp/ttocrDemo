@@ -3,6 +3,9 @@ package com.morvaibarnaerp.OCRWrapperTest
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
@@ -15,11 +18,32 @@ class RatioRectangleView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
 
+    private val rectF = RectF()
+    private var rectWidth: Float = 0f
+    private var rectHeight: Float = 0f
+    private var left: Float = 0f
+    private var top: Float = 0f
+    private val cornerLength = 150f
+    private val borderRadius = 70f
+
     private val paint = Paint().apply {
         color = ContextCompat.getColor(context, R.color.white)
         strokeWidth = 20f
         style = Paint.Style.STROKE
         strokeCap = Paint.Cap.ROUND
+    }
+
+    private val overlayPaint = Paint().apply {
+        color = ContextCompat.getColor(context, R.color.black) // Use black color
+        alpha = 130 // Adjust alpha for transparency (0 to 255)
+        style = Paint.Style.FILL
+    }
+
+    private var path = Path()
+
+
+    private val clearPaint = Paint().apply {
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
     private var widthRatio: Int = 1
@@ -35,14 +59,6 @@ class RatioRectangleView @JvmOverloads constructor(
             calculateDimensions()
             invalidate()
         }
-
-    private val rectF = RectF()
-    private var rectWidth: Float = 0f
-    private var rectHeight: Float = 0f
-    private var left: Float = 0f
-    private var top: Float = 0f
-    private val cornerLength = 150f // Length of the corner segments
-    private val borderRadius = 70f // Radius for rounded corners
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -76,12 +92,29 @@ class RatioRectangleView @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        path.apply {
+            addRoundRect(rectF, borderRadius, borderRadius, Path.Direction.CW)
+        }
+        canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), overlayPaint)
 
-        // Draw rounded corners
+        canvas.save()
+
+        canvas.clipPath(path)
+
+
+        canvas.drawRect(rectF, clearPaint)
+
+        canvas.restore()
+
         drawRoundedCorner(canvas, left, top) // Top-left
         drawRoundedCorner(canvas, left + rectWidth, top, isTopRight = true) // Top-right
         drawRoundedCorner(canvas, left, top + rectHeight, isBottomLeft = true) // Bottom-left
-        drawRoundedCorner(canvas, left + rectWidth, top + rectHeight, isBottomRight = true) // Bottom-right
+        drawRoundedCorner(
+            canvas,
+            left + rectWidth,
+            top + rectHeight,
+            isBottomRight = true
+        ) // Bottom-right
     }
 
     private fun drawRoundedCorner(
@@ -94,8 +127,20 @@ class RatioRectangleView @JvmOverloads constructor(
                 RectF(cx, cy, cx + 2 * borderRadius, cy + 2 * borderRadius),
                 180f, 90f, false, paint
             )
-            canvas.drawLine(cx + borderRadius, cy, cx + borderRadius + cornerLength, cy, paint) // horizontal
-            canvas.drawLine(cx, cy + borderRadius, cx, cy + borderRadius + cornerLength, paint) // vertical
+            canvas.drawLine(
+                cx + borderRadius,
+                cy,
+                cx + borderRadius + cornerLength,
+                cy,
+                paint
+            ) // horizontal
+            canvas.drawLine(
+                cx,
+                cy + borderRadius,
+                cx,
+                cy + borderRadius + cornerLength,
+                paint
+            ) // vertical
         }
 
         // Top-right corner
@@ -104,8 +149,20 @@ class RatioRectangleView @JvmOverloads constructor(
                 RectF(cx - 2 * borderRadius, cy, cx, cy + 2 * borderRadius),
                 270f, 90f, false, paint
             )
-            canvas.drawLine(cx - borderRadius, cy, cx - borderRadius - cornerLength, cy, paint) // horizontal
-            canvas.drawLine(cx, cy + borderRadius, cx, cy + borderRadius + cornerLength, paint) // vertical
+            canvas.drawLine(
+                cx - borderRadius,
+                cy,
+                cx - borderRadius - cornerLength,
+                cy,
+                paint
+            ) // horizontal
+            canvas.drawLine(
+                cx,
+                cy + borderRadius,
+                cx,
+                cy + borderRadius + cornerLength,
+                paint
+            ) // vertical
         }
 
         // Bottom-left corner
@@ -114,8 +171,20 @@ class RatioRectangleView @JvmOverloads constructor(
                 RectF(cx, cy - 2 * borderRadius, cx + 2 * borderRadius, cy),
                 90f, 90f, false, paint
             )
-            canvas.drawLine(cx + borderRadius, cy, cx + borderRadius + cornerLength, cy, paint) // horizontal
-            canvas.drawLine(cx, cy - borderRadius, cx, cy - borderRadius - cornerLength, paint) // vertical
+            canvas.drawLine(
+                cx + borderRadius,
+                cy,
+                cx + borderRadius + cornerLength,
+                cy,
+                paint
+            ) // horizontal
+            canvas.drawLine(
+                cx,
+                cy - borderRadius,
+                cx,
+                cy - borderRadius - cornerLength,
+                paint
+            ) // vertical
         }
 
         // Bottom-right corner
@@ -124,8 +193,20 @@ class RatioRectangleView @JvmOverloads constructor(
                 RectF(cx - 2 * borderRadius, cy - 2 * borderRadius, cx, cy),
                 0f, 90f, false, paint
             )
-            canvas.drawLine(cx - borderRadius, cy, cx - borderRadius - cornerLength, cy, paint) // horizontal
-            canvas.drawLine(cx, cy - borderRadius, cx, cy - borderRadius - cornerLength, paint) // vertical
+            canvas.drawLine(
+                cx - borderRadius,
+                cy,
+                cx - borderRadius - cornerLength,
+                cy,
+                paint
+            ) // horizontal
+            canvas.drawLine(
+                cx,
+                cy - borderRadius,
+                cx,
+                cy - borderRadius - cornerLength,
+                paint
+            ) // vertical
         }
     }
 
