@@ -29,13 +29,13 @@ const deleteImage = (path) => {
 const FinalPage = ({ route, navigation }) => {
   const { allas, gyariSzam, savedImagePath } = route.params;
   const [kwh, setKwh] = useState(allas);
-
+  console.log(savedImagePath);
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.container}>
           <Image
-            source={{ uri: "file://" + savedImagePath }} // Update the path to your local image
+            source={{ uri: "file://" + savedImagePath }}
             style={styles.image}
           />
           <View style={styles.text}>

@@ -35,6 +35,11 @@ install! 'cocoapods',
 prepare_react_native_project!
 
 target 'OCRWrapperTest' do
+  pod 'GoogleMLKit/TextRecognition', '3.2.0'
+  pod 'GoogleMLKit/BarcodeScanning', '3.2.0'
+  pod 'TensorFlowLiteSwift'
+  pod 'TensorFlowLiteSelectTfOps', '~> 0.0.1-nightly'
+  
   use_expo_modules!
   config = use_native_modules!
 

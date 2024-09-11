@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,29 +11,69 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
-		64106CA3B695D4853ED2CFFD /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 01AEE56FBDFC4847B2D1F464 /* PrivacyInfo.xcprivacy */; };
-		666A6896F4FA439C99885347 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B2D5FEDBD6416D8D4C683B /* noop-file.swift */; };
+		6704CC6301183FC1ED3EA171 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2345719A47DB14E7B4785387 /* PrivacyInfo.xcprivacy */; };
+		84972C422C9088E800530DC9 /* SimpleViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C402C9088E800530DC9 /* SimpleViewProxy.swift */; };
+		84972C462C9088F300530DC9 /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C432C9088F300530DC9 /* OCRView.swift */; };
+		84972C4B2C9088FF00530DC9 /* OCRViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84972C482C9088FF00530DC9 /* OCRViewManager.m */; };
+		84972C4C2C9088FF00530DC9 /* OCRViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C492C9088FF00530DC9 /* OCRViewManager.swift */; };
+		84972C4E2C90901800530DC9 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C4D2C90901800530DC9 /* CIImage+Extension.swift */; };
+		84972C502C90902700530DC9 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C4F2C90902600530DC9 /* CMSampleBuffer+Extension.swift */; };
+		84972C522C90903000530DC9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C512C90903000530DC9 /* ContentView.swift */; };
+		84972C562C90904400530DC9 /* Detector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C552C90904400530DC9 /* Detector.swift */; };
+		84972C592C90904E00530DC9 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 84972C572C90904E00530DC9 /* Montserrat-Regular.ttf */; };
+		84972C5B2C90905700530DC9 /* ModelDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C5A2C90905700530DC9 /* ModelDetector.swift */; };
+		84972C5D2C90905F00530DC9 /* ModelRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C5C2C90905F00530DC9 /* ModelRecognition.swift */; };
+		84972C612C90906800530DC9 /* detect.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 84972C5E2C90906800530DC9 /* detect.tflite */; };
+		84972C622C90906800530DC9 /* recognition.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 84972C5F2C90906800530DC9 /* recognition.tflite */; };
+		84972C642C90906D00530DC9 /* Prediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C632C90906D00530DC9 /* Prediction.swift */; };
+		84972C6B2C90907C00530DC9 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C652C90907B00530DC9 /* CardView.swift */; };
+		84972C6C2C90907C00530DC9 /* CloseCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C662C90907B00530DC9 /* CloseCameraButton.swift */; };
+		84972C6D2C90907C00530DC9 /* FlashLightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C672C90907B00530DC9 /* FlashLightButton.swift */; };
+		84972C6E2C90907C00530DC9 /* RatioRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C682C90907B00530DC9 /* RatioRectangleView.swift */; };
+		84972C6F2C90907C00530DC9 /* RectangleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C692C90907B00530DC9 /* RectangleData.swift */; };
+		84972C712C90908C00530DC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C702C90908C00530DC9 /* ViewController.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-OCRWrapperTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-OCRWrapperTest.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		E1E78D08141F4E40AB6DA1F9 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F5FEC2EA0643B29E51E95C /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01AEE56FBDFC4847B2D1F464 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = OCRWrapperTest/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		027E291B3E484FEEB31CBA4C /* OCRWrapperTest-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "OCRWrapperTest-Bridging-Header.h"; path = "OCRWrapperTest/OCRWrapperTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* OCRWrapperTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRWrapperTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = OCRWrapperTest/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = OCRWrapperTest/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = OCRWrapperTest/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = OCRWrapperTest/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = OCRWrapperTest/main.m; sourceTree = "<group>"; };
+		2345719A47DB14E7B4785387 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = OCRWrapperTest/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-OCRWrapperTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OCRWrapperTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-OCRWrapperTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRWrapperTest.debug.xcconfig"; path = "Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-OCRWrapperTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRWrapperTest.release.xcconfig"; path = "Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest.release.xcconfig"; sourceTree = "<group>"; };
+		84972C402C9088E800530DC9 /* SimpleViewProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleViewProxy.swift; sourceTree = "<group>"; };
+		84972C432C9088F300530DC9 /* OCRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
+		84972C482C9088FF00530DC9 /* OCRViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRViewManager.m; sourceTree = "<group>"; };
+		84972C492C9088FF00530DC9 /* OCRViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCRViewManager.swift; sourceTree = "<group>"; };
+		84972C4D2C90901800530DC9 /* CIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
+		84972C4F2C90902600530DC9 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
+		84972C512C90903000530DC9 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		84972C552C90904400530DC9 /* Detector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detector.swift; sourceTree = "<group>"; };
+		84972C572C90904E00530DC9 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		84972C5A2C90905700530DC9 /* ModelDetector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDetector.swift; sourceTree = "<group>"; };
+		84972C5C2C90905F00530DC9 /* ModelRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelRecognition.swift; sourceTree = "<group>"; };
+		84972C5E2C90906800530DC9 /* detect.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = detect.tflite; sourceTree = "<group>"; };
+		84972C5F2C90906800530DC9 /* recognition.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = recognition.tflite; sourceTree = "<group>"; };
+		84972C632C90906D00530DC9 /* Prediction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prediction.swift; sourceTree = "<group>"; };
+		84972C652C90907B00530DC9 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		84972C662C90907B00530DC9 /* CloseCameraButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseCameraButton.swift; sourceTree = "<group>"; };
+		84972C672C90907B00530DC9 /* FlashLightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlashLightButton.swift; sourceTree = "<group>"; };
+		84972C682C90907B00530DC9 /* RatioRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioRectangleView.swift; sourceTree = "<group>"; };
+		84972C692C90907B00530DC9 /* RectangleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleData.swift; sourceTree = "<group>"; };
+		84972C702C90908C00530DC9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A8F5FEC2EA0643B29E51E95C /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "OCRWrapperTest/noop-file.swift"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = OCRWrapperTest/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
-		D4B2D5FEDBD6416D8D4C683B /* noop-file.swift */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.swift; name = "noop-file.swift"; path = "OCRWrapperTest/noop-file.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F090CE58AECD4FB8A66DFBFD /* OCRWrapperTest-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "OCRWrapperTest-Bridging-Header.h"; path = "OCRWrapperTest/OCRWrapperTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-OCRWrapperTest/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -59,9 +99,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
-				D4B2D5FEDBD6416D8D4C683B /* noop-file.swift */,
-				F090CE58AECD4FB8A66DFBFD /* OCRWrapperTest-Bridging-Header.h */,
-				01AEE56FBDFC4847B2D1F464 /* PrivacyInfo.xcprivacy */,
+				A8F5FEC2EA0643B29E51E95C /* noop-file.swift */,
+				027E291B3E484FEEB31CBA4C /* OCRWrapperTest-Bridging-Header.h */,
+				2345719A47DB14E7B4785387 /* PrivacyInfo.xcprivacy */,
 			);
 			name = OCRWrapperTest;
 			sourceTree = "<group>";
@@ -85,6 +125,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				84972C4A2C9088FF00530DC9 /* ViewManager */,
+				84972C452C9088F300530DC9 /* SwiftUIView */,
+				84972C412C9088E800530DC9 /* HostingView */,
 				13B07FAE1A68108700A75B9A /* OCRWrapperTest */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -103,6 +146,71 @@
 				13B07F961A680F5B00A75B9A /* OCRWrapperTest.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		84972C412C9088E800530DC9 /* HostingView */ = {
+			isa = PBXGroup;
+			children = (
+				84972C402C9088E800530DC9 /* SimpleViewProxy.swift */,
+			);
+			path = HostingView;
+			sourceTree = "<group>";
+		};
+		84972C452C9088F300530DC9 /* SwiftUIView */ = {
+			isa = PBXGroup;
+			children = (
+				84972C702C90908C00530DC9 /* ViewController.swift */,
+				84972C6A2C90907B00530DC9 /* View */,
+				84972C632C90906D00530DC9 /* Prediction.swift */,
+				84972C602C90906800530DC9 /* models */,
+				84972C5C2C90905F00530DC9 /* ModelRecognition.swift */,
+				84972C5A2C90905700530DC9 /* ModelDetector.swift */,
+				84972C582C90904E00530DC9 /* fonts */,
+				84972C552C90904400530DC9 /* Detector.swift */,
+				84972C512C90903000530DC9 /* ContentView.swift */,
+				84972C4F2C90902600530DC9 /* CMSampleBuffer+Extension.swift */,
+				84972C4D2C90901800530DC9 /* CIImage+Extension.swift */,
+				84972C432C9088F300530DC9 /* OCRView.swift */,
+			);
+			path = SwiftUIView;
+			sourceTree = "<group>";
+		};
+		84972C4A2C9088FF00530DC9 /* ViewManager */ = {
+			isa = PBXGroup;
+			children = (
+				84972C482C9088FF00530DC9 /* OCRViewManager.m */,
+				84972C492C9088FF00530DC9 /* OCRViewManager.swift */,
+			);
+			path = ViewManager;
+			sourceTree = "<group>";
+		};
+		84972C582C90904E00530DC9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				84972C572C90904E00530DC9 /* Montserrat-Regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		84972C602C90906800530DC9 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				84972C5E2C90906800530DC9 /* detect.tflite */,
+				84972C5F2C90906800530DC9 /* recognition.tflite */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		84972C6A2C90907B00530DC9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84972C652C90907B00530DC9 /* CardView.swift */,
+				84972C662C90907B00530DC9 /* CloseCameraButton.swift */,
+				84972C672C90907B00530DC9 /* FlashLightButton.swift */,
+				84972C682C90907B00530DC9 /* RatioRectangleView.swift */,
+				84972C692C90907B00530DC9 /* RectangleData.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		92DBD88DE9BF7D494EA9DA96 /* OCRWrapperTest */ = {
@@ -147,13 +255,13 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "OCRWrapperTest" */;
 			buildPhases = (
 				08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */,
-				655D7E526AE1E10186155107 /* [Expo] Configure project */,
+				DB9EBE9BA0B05777E6624C0A /* [Expo] Configure project */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */,
-				0897C9BA8AD2653F27A53099 /* [CP] Embed Pods Frameworks */,
+				4D5FF48E2B71ED06E4EE7C96 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,10 +308,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84972C612C90906800530DC9 /* detect.tflite in Resources */,
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				84972C622C90906800530DC9 /* recognition.tflite in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
-				64106CA3B695D4853ED2CFFD /* PrivacyInfo.xcprivacy in Resources */,
+				84972C592C90904E00530DC9 /* Montserrat-Regular.ttf in Resources */,
+				6704CC6301183FC1ED3EA171 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,24 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"$PODS_ROOT/../.xcode.env\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env\"\nfi\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n# The project root by default is one level up from the ios directory\nexport PROJECT_ROOT=\"$PROJECT_DIR\"/..\n\nif [[ \"$CONFIGURATION\" = *Debug* ]]; then\n  export SKIP_BUNDLING=1\nfi\nif [[ -z \"$ENTRY_FILE\" ]]; then\n  # Set the entry JS file using the bundler's entry resolution.\n  export ENTRY_FILE=\"$(\"$NODE_BINARY\" -e \"require('expo/scripts/resolveAppEntry')\" \"$PROJECT_ROOT\" ios absolute | tail -n 1)\"\nfi\n\nif [[ -z \"$CLI_PATH\" ]]; then\n  # Use Expo CLI\n  export CLI_PATH=\"$(\"$NODE_BINARY\" --print \"require.resolve('@expo/cli', { paths: [require.resolve('expo/package.json')] })\")\"\nfi\nif [[ -z \"$BUNDLE_COMMAND\" ]]; then\n  # Default Expo CLI command for bundling\n  export BUNDLE_COMMAND=\"export:embed\"\nfi\n\n# Source .xcode.env.updates if it exists to allow\n# SKIP_BUNDLING to be unset if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.updates\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.updates\"\nfi\n# Source local changes to allow overrides\n# if needed\nif [[ -f \"$PODS_ROOT/../.xcode.env.local\" ]]; then\n  source \"$PODS_ROOT/../.xcode.env.local\"\nfi\n\n`\"$NODE_BINARY\" --print \"require('path').dirname(require.resolve('react-native/package.json')) + '/scripts/react-native-xcode.sh'\"`\n\n";
-		};
-		0897C9BA8AD2653F27A53099 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -265,7 +358,67 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		655D7E526AE1E10186155107 /* [Expo] Configure project */ = {
+		4D5FF48E2B71ED06E4EE7C96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/Pre-built/hermes.framework/hermes",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport/GoogleDataTransport_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities/GoogleUtilities_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MLKitTextRecognition/LatinOCRResources.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC/FBLPromises_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf/Protobuf_Privacy.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteC/TensorFlowLiteC.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteSelectTfOps/TensorFlowLiteSelectTfOps.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/TensorFlowLiteSwift/TensorFlowLite.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/nanopb/nanopb_Privacy.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoConstants_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoFileSystem_privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleDataTransport_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleUtilities_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LatinOCRResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FBLPromises_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Protobuf_Privacy.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCTI18nStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TensorFlowLiteC.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TensorFlowLiteSelectTfOps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TensorFlowLite.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/nanopb_Privacy.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DB9EBE9BA0B05777E6624C0A /* [Expo] Configure project */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -284,30 +437,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# This script configures Expo modules and generates the modules provider file.\nbash -l -c \"./Pods/Target\\ Support\\ Files/Pods-OCRWrapperTest/expo-configure-project.sh\"\n";
 		};
-		800E24972A6A228C8D4807E9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/EXConstants.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/EXConstants/ExpoConstants_privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/ExpoFileSystem/ExpoFileSystem_privacy.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EXConstants.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoConstants_privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExpoFileSystem_privacy.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCTI18nStrings.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -315,10 +444,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84972C4E2C90901800530DC9 /* CIImage+Extension.swift in Sources */,
+				84972C522C90903000530DC9 /* ContentView.swift in Sources */,
+				84972C6E2C90907C00530DC9 /* RatioRectangleView.swift in Sources */,
+				84972C422C9088E800530DC9 /* SimpleViewProxy.swift in Sources */,
+				84972C712C90908C00530DC9 /* ViewController.swift in Sources */,
+				84972C5D2C90905F00530DC9 /* ModelRecognition.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				84972C5B2C90905700530DC9 /* ModelDetector.swift in Sources */,
+				84972C462C9088F300530DC9 /* OCRView.swift in Sources */,
+				84972C4C2C9088FF00530DC9 /* OCRViewManager.swift in Sources */,
+				84972C6C2C90907C00530DC9 /* CloseCameraButton.swift in Sources */,
+				84972C4B2C9088FF00530DC9 /* OCRViewManager.m in Sources */,
+				84972C562C90904400530DC9 /* Detector.swift in Sources */,
+				84972C642C90906D00530DC9 /* Prediction.swift in Sources */,
 				B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */,
-				666A6896F4FA439C99885347 /* noop-file.swift in Sources */,
+				84972C6F2C90907C00530DC9 /* RectangleData.swift in Sources */,
+				E1E78D08141F4E40AB6DA1F9 /* noop-file.swift in Sources */,
+				84972C6B2C90907C00530DC9 /* CardView.swift in Sources */,
+				84972C6D2C90907C00530DC9 /* FlashLightButton.swift in Sources */,
+				84972C502C90902700530DC9 /* CMSampleBuffer+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,19 +479,25 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OCRWrapperTest/OCRWrapperTest.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCMNSS5BY9;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = OCRWrapperTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-force_load",
+					"$(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.morvaibarnaerp.OCRWrapperTest;
@@ -366,14 +518,20 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OCRWrapperTest/OCRWrapperTest.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JCMNSS5BY9;
 				INFOPLIST_FILE = OCRWrapperTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-force_load",
+					"$(SRCROOT)/Pods/TensorFlowLiteSelectTfOps/Frameworks/TensorFlowLiteSelectTfOps.xcframework/ios-arm64/TensorFlowLiteSelectTfOps.framework/TensorFlowLiteSelectTfOps",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.morvaibarnaerp.OCRWrapperTest;
@@ -437,14 +595,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -496,13 +654,13 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD = "";
 				LDPLUSPLUS = "";
-				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					/usr/lib/swift,
+					"$(inherited)",
+				);
 				LIBRARY_SEARCH_PATHS = "$(SDKROOT)/usr/lib/swift\"$(inherited)\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

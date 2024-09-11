@@ -18,7 +18,7 @@ export default function App() {
           name="Home"
           component={HomePage}
           options={{
-            title: "Mérőóra leolvasó Android Demo",
+            title: "Mérőóra leolvasó Demo",
           }}
           initialParams={{ gyariSzamRoute: "440011700485475" }}
         />
@@ -27,6 +27,7 @@ export default function App() {
           component={CameraPage}
           options={{
             headerShown: false,
+            headerBackTitle: "Főoldal",
           }}
         />
         <Stack.Screen
@@ -34,6 +35,7 @@ export default function App() {
           component={FinalPage}
           options={{
             title: "Eredmény",
+            headerBackVisible: false,
           }}
         />
       </Stack.Navigator>
