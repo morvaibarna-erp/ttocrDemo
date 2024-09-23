@@ -3,6 +3,7 @@ package com.morvaibarnaerp.OCRWrapperTest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.os.SystemClock
 import android.util.Log
@@ -22,6 +23,7 @@ import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.TransformToGrayscaleOp
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 import java.nio.ByteBuffer
@@ -55,7 +57,6 @@ class Detector(
     private var success = false
     private var value: String = ""
 
-
     private val imageProcessor = ImageProcessor.Builder()
         .add(NormalizeOp(INPUT_MEAN, INPUT_STANDARD_DEVIATION))
         .add(CastOp(INPUT_IMAGE_TYPE))
@@ -86,7 +87,6 @@ class Detector(
                 this.setNumThreads(4)
             }
         }
-
         val detectModel = FileUtil.loadMappedFile(context, detectModelPath)
         val recognitionModel = FileUtil.loadMappedFile(context, recogModelPath)
         interpreter = Interpreter(detectModel, options)
@@ -188,13 +188,11 @@ class Detector(
 
 
             bestBoxes.sortedByDescending { it.cnf }
-            Log.e("cnf", bestBoxes[0].cnf.toString())
             if (countOfMeasure <= 15) {
                 val recognitionBitmap = createEmptyBitmap(
                     frame,
                     (frame.width * bestBoxes[0].w).toInt(),
                     (frame.height * bestBoxes[0].h).toInt(),
-
                     (frame.width * bestBoxes[0].x1).toInt(),
                     (frame.height * bestBoxes[0].y1).toInt(),
                 )
@@ -223,6 +221,7 @@ class Detector(
                     }
                 } else {
                     Log.e("countOfMeasure", countOfMeasure.toString())
+
                     runOCR(recognitionBitmap) { recognizedText ->
                         if (recognizedText != "") {
                             Log.e("allas", recognizedText)
@@ -307,10 +306,13 @@ class Detector(
 
     private fun runOCR(bitmap: Bitmap, callback: (String) -> Unit) {
         val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-        val image = InputImage.fromBitmap(bitmap, 0)
+        val resizedBitmap = resize(bitmap, 1000, 2000)
+//        inverseBitmapColors(bitmap)
+        val image = InputImage.fromBitmap(resizedBitmap, 0)
         recognizer.process(image)
             .addOnSuccessListener { visionText ->
                 var resultText = ""
+
                 for (block in visionText.textBlocks) {
                     var blockText = block.text
 
@@ -361,6 +363,7 @@ class Detector(
                     }
 
                     resultText += blockText
+                    Log.e("allas", resultText)
                 }
                 callback(resultText)
             }
@@ -369,6 +372,33 @@ class Detector(
             }
     }
 
+    fun resize(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+
+        val aspectRatio: Float = width.toFloat() / height.toFloat()
+        val newWidth: Int
+        val newHeight: Int
+
+        if (width > height) {
+            newWidth = maxWidth
+            newHeight = (newWidth / aspectRatio).toInt()
+        } else {
+            newHeight = maxHeight
+            newWidth = (newHeight * aspectRatio).toInt()
+        }
+
+        return Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, false)
+    }
+
+
+    private fun inverseBitmapColors(bitmap: Bitmap) {
+        for (i in 0 until bitmap.width) {
+            for (j in 0 until bitmap.height) {
+                bitmap.setPixel(i, j, bitmap.getPixel(i, j) xor 0x00ffffff)
+            }
+        }
+    }
 
     fun getResult(): String {
         return value
