@@ -3,7 +3,12 @@ package com.morvaibarnaerp.OCRWrapperTest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.os.SystemClock
+import android.util.Log
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.morvaibarnaerp.OCRWrapperTest.Metadata.extractNamesFromMetadata
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
@@ -179,10 +184,78 @@ class Detector(
         if (bestBoxes == null) {
             detectorListener.onEmptyDetect()
             return
+        } else {
+
+
+            bestBoxes.sortedByDescending { it.cnf }
+            Log.e("cnf", bestBoxes[0].cnf.toString())
+            if (countOfMeasure <= 15) {
+                val recognitionBitmap = createEmptyBitmap(
+                    frame,
+                    (frame.width * bestBoxes[0].w).toInt(),
+                    (frame.height * bestBoxes[0].h).toInt(),
+
+                    (frame.width * bestBoxes[0].x1).toInt(),
+                    (frame.height * bestBoxes[0].y1).toInt(),
+                )
+
+                var recognizedText = ""
+                if (bestBoxes[0].clsName == "segment") {
+                    val recognitionTensorImage = bitmapToTensorImageForRecognition(
+                        recognitionBitmap,
+                        recognitionImageWidth,
+                        recognitionImageHeight,
+                        recognitionImageMean,
+                        recognitionImageStd
+                    )
+                    recognitionResult.rewind()
+                    recognitionInterpreter.run(recognitionTensorImage.buffer, recognitionResult)
+
+                    for (k in 0 until recognitionModelOutputSize) {
+                        val alphabetIndex = recognitionResult.getInt(k * 8)
+                        if (alphabetIndex in alphabets.indices) {
+                            recognizedText += alphabets[alphabetIndex]
+                        }
+                    }
+                    if (recognizedText.isNotEmpty()) {
+                        ocrResults.add(recognizedText)
+                        countOfMeasure++
+                    }
+                } else {
+                    Log.e("countOfMeasure", countOfMeasure.toString())
+                    runOCR(recognitionBitmap) { recognizedText ->
+                        if (recognizedText != "") {
+                            Log.e("allas", recognizedText)
+                            countOfMeasure++
+                            ocrResults.add(recognizedText)
+                        }
+                    }
+                }
+            } else {
+                if (mostFrequentStringWithPercentage(ocrResults) != null) {
+                    success = true
+                    value = mostFrequentStringWithPercentage(ocrResults)?.first.toString()
+                    result = "$value kWh"
+                    resultPercentage =
+                        mostFrequentStringWithPercentage(ocrResults)?.second.toString() + "%"
+//                        Log.e("kwh",value)
+                } else {
+                    success = false
+                    result = "Nincs találat"
+                    resultPercentage = ""
+                }
+            }
         }
         detectorListener.onDetect(bestBoxes, inferenceTime, result, resultPercentage)
     }
 
+    fun rotateBitmap(source: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        return Bitmap.createBitmap(
+            source, 0, 0, source.width, source.height, matrix, true
+        )
+    }
 
     @SuppressLint("SuspiciousIndentation")
     private fun bestBox(array: FloatArray, frame: Bitmap): List<BoundingBox>? {
@@ -224,71 +297,88 @@ class Detector(
                         cnf = maxConf, cls = maxIdx, clsName = clsName
                     )
                 )
-
-                if ((0..10).random() == 1) {
-                    countOfMeasure++
-
-                    val recognitionBitmap = createEmptyBitmap(
-                        frame,
-                        (frame.width * boundingBoxes[0].w).toInt(),
-                        (frame.height * boundingBoxes[0].h).toInt(),
-
-                        (frame.width * boundingBoxes[0].x1).toInt(),
-                        (frame.height * boundingBoxes[0].y1).toInt(),
-                    )
-
-                    val recognitionTensorImage = bitmapToTensorImageForRecognition(
-                        recognitionBitmap,
-                        recognitionImageWidth,
-                        recognitionImageHeight,
-                        recognitionImageMean,
-                        recognitionImageStd
-                    )
-
-                    recognitionResult.rewind()
-                    recognitionInterpreter.run(recognitionTensorImage.buffer, recognitionResult)
-
-                    var recognizedText = ""
-                    for (k in 0 until recognitionModelOutputSize) {
-                        val alphabetIndex = recognitionResult.getInt(k * 8)
-                        if (alphabetIndex in alphabets.indices) {
-                            recognizedText += alphabets[alphabetIndex]
-                        }
-                    }
-                    if (recognizedText.isNotEmpty()) {
-                        ocrResults.add(recognizedText)
-                    }
-                }
-                if (countOfMeasure == 5) {
-                    if (mostFrequentStringWithPercentage(ocrResults) != null){
-                        success = true
-                        value = mostFrequentStringWithPercentage(ocrResults)?.first.toString()
-                        result = "$value kWh"
-                        resultPercentage =
-                            mostFrequentStringWithPercentage(ocrResults)?.second.toString() + "%"
-//                        Log.e("kwh",value)
-                    }
-                    else {
-                        success = false
-                        result = "Nincs találat"
-                        resultPercentage = ""
-                    }
-                } else if (countOfMeasure < 5) {
-//                    Log.e("Kísérlet", countOfMeasure.toString())
-                }
             }
+
         }
 
         if (boundingBoxes.isEmpty()) return null
         return applyNMS(boundingBoxes)
     }
+
+    private fun runOCR(bitmap: Bitmap, callback: (String) -> Unit) {
+        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val image = InputImage.fromBitmap(bitmap, 0)
+        recognizer.process(image)
+            .addOnSuccessListener { visionText ->
+                var resultText = ""
+                for (block in visionText.textBlocks) {
+                    var blockText = block.text
+
+                    if (blockText.contains(" ")) {
+                        blockText = blockText.replace(" ", "")
+                    }
+                    if (blockText.contains("O")) {
+                        blockText = blockText.replace("O", "0")
+                    }
+                    if (blockText.contains("o")) {
+                        blockText = blockText.replace("o", "0")
+                    }
+                    if (blockText.contains("D")) {
+                        blockText = blockText.replace("D", "0")
+                    }
+                    if (blockText.contains("I")) {
+                        blockText = blockText.replace("I", "1")
+                    }
+                    if (blockText.contains("i")) {
+                        blockText = blockText.replace("i", "1")
+                    }
+                    if (blockText.contains("S")) {
+                        blockText = blockText.replace("S", "5")
+                    }
+                    if (blockText.contains("s")) {
+                        blockText = blockText.replace("s", "5")
+                    }
+                    if (blockText.contains("Z")) {
+                        blockText = blockText.replace("Z", "7")
+                    }
+                    if (blockText.contains("z")) {
+                        blockText = blockText.replace("z", "7")
+                    }
+                    if (blockText.contains("B")) {
+                        blockText = blockText.replace("B", "8")
+                    }
+                    if (blockText.contains("G")) {
+                        blockText = blockText.replace("G", "6")
+                    }
+                    if (blockText.contains("g")) {
+                        blockText = blockText.replace("g", "9")
+                    }
+                    if (blockText.contains("A")) {
+                        blockText = blockText.replace("A", "4")
+                    }
+                    if (blockText.contains("E")) {
+                        blockText = blockText.replace("E", "3")
+                    }
+
+                    resultText += blockText
+                }
+                callback(resultText)
+            }
+            .addOnFailureListener { e ->
+                callback("")  // Return empty text in case of failure
+            }
+    }
+
+
     fun getResult(): String {
         return value
     }
-    fun getSuccess():Boolean{
+
+    fun getSuccess(): Boolean {
         return success
     }
-    fun setSuccess(success:Boolean){
+
+    fun setSuccess(success: Boolean) {
         this.success = success
     }
 
@@ -309,12 +399,24 @@ class Detector(
         return Pair(mostFrequentString, percentage)
     }
 
-    private fun createEmptyBitmap(frame: Bitmap,imageWidth: Int,imageHeigth: Int,x: Int,y: Int,): Bitmap {
+    private fun createEmptyBitmap(
+        frame: Bitmap,
+        imageWidth: Int,
+        imageHeigth: Int,
+        x: Int,
+        y: Int,
+    ): Bitmap {
         val ret = Bitmap.createBitmap(frame, x, y, imageWidth, imageHeigth)
         return ret
     }
 
-    private fun bitmapToTensorImageForRecognition(bitmapIn: Bitmap,width: Int,height: Int,mean: Float,std: Float): TensorImage {
+    private fun bitmapToTensorImageForRecognition(
+        bitmapIn: Bitmap,
+        width: Int,
+        height: Int,
+        mean: Float,
+        std: Float
+    ): TensorImage {
         val imageProcessor =
             ImageProcessor.Builder()
                 .add(ResizeOp(height, width, ResizeOp.ResizeMethod.BILINEAR))
@@ -378,7 +480,7 @@ class Detector(
         private const val INPUT_STANDARD_DEVIATION = 255f
         private val INPUT_IMAGE_TYPE = DataType.FLOAT32
         private val OUTPUT_IMAGE_TYPE = DataType.FLOAT32
-        private const val CONFIDENCE_THRESHOLD = 0.8f
+        private const val CONFIDENCE_THRESHOLD = 0.6f
         private const val IOU_THRESHOLD = 0.5F
         private const val recognitionModelOutputSize = 48
         private const val recognitionImageHeight = 31

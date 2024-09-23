@@ -13,8 +13,8 @@ import SwiftUI
 import UIKit
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
-  var confidenceThreshold: Float = 0.3
-  var iouThreshold: Float = 0.8
+  var confidenceThreshold: Float = 0.1
+  var iouThreshold: Float = 0.5
   var predictions: [Prediction] = []
 
   var OCRResults: [String] = []

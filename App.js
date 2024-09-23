@@ -20,7 +20,7 @@ export default function App() {
           options={{
             title: "Mérőóra leolvasó Demo",
           }}
-          initialParams={{ gyariSzamRoute: "440011700485475" }}
+          initialParams={{ gyariSzamRoute: "0" }}
         />
         <Stack.Screen
           name="Camera"

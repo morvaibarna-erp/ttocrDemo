@@ -12,6 +12,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		6704CC6301183FC1ED3EA171 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2345719A47DB14E7B4785387 /* PrivacyInfo.xcprivacy */; };
+		843FC47C2C94659F00A922ED /* two_label_v3_float16.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 843FC47B2C94659E00A922ED /* two_label_v3_float16.tflite */; };
+		843FC47E2C9478A700A922ED /* train_with_bound_boxes_float16.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 843FC47D2C9478A600A922ED /* train_with_bound_boxes_float16.tflite */; };
+		843FC4802C947BF500A922ED /* BoundModelDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FC47F2C947BF500A922ED /* BoundModelDetector.swift */; };
 		84972C422C9088E800530DC9 /* SimpleViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C402C9088E800530DC9 /* SimpleViewProxy.swift */; };
 		84972C462C9088F300530DC9 /* OCRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84972C432C9088F300530DC9 /* OCRView.swift */; };
 		84972C4B2C9088FF00530DC9 /* OCRViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84972C482C9088FF00530DC9 /* OCRViewManager.m */; };
@@ -50,6 +53,9 @@
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-OCRWrapperTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OCRWrapperTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-OCRWrapperTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRWrapperTest.debug.xcconfig"; path = "Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-OCRWrapperTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCRWrapperTest.release.xcconfig"; path = "Target Support Files/Pods-OCRWrapperTest/Pods-OCRWrapperTest.release.xcconfig"; sourceTree = "<group>"; };
+		843FC47B2C94659E00A922ED /* two_label_v3_float16.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = two_label_v3_float16.tflite; sourceTree = "<group>"; };
+		843FC47D2C9478A600A922ED /* train_with_bound_boxes_float16.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = train_with_bound_boxes_float16.tflite; sourceTree = "<group>"; };
+		843FC47F2C947BF500A922ED /* BoundModelDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundModelDetector.swift; sourceTree = "<group>"; };
 		84972C402C9088E800530DC9 /* SimpleViewProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleViewProxy.swift; sourceTree = "<group>"; };
 		84972C432C9088F300530DC9 /* OCRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCRView.swift; sourceTree = "<group>"; };
 		84972C482C9088FF00530DC9 /* OCRViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCRViewManager.m; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				84972C602C90906800530DC9 /* models */,
 				84972C5C2C90905F00530DC9 /* ModelRecognition.swift */,
 				84972C5A2C90905700530DC9 /* ModelDetector.swift */,
+				843FC47F2C947BF500A922ED /* BoundModelDetector.swift */,
 				84972C582C90904E00530DC9 /* fonts */,
 				84972C552C90904400530DC9 /* Detector.swift */,
 				84972C512C90903000530DC9 /* ContentView.swift */,
@@ -195,6 +202,8 @@
 		84972C602C90906800530DC9 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				843FC47D2C9478A600A922ED /* train_with_bound_boxes_float16.tflite */,
+				843FC47B2C94659E00A922ED /* two_label_v3_float16.tflite */,
 				84972C5E2C90906800530DC9 /* detect.tflite */,
 				84972C5F2C90906800530DC9 /* recognition.tflite */,
 			);
@@ -312,8 +321,10 @@
 				BB2F792D24A3F905000567C9 /* Expo.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				84972C622C90906800530DC9 /* recognition.tflite in Resources */,
+				843FC47E2C9478A700A922ED /* train_with_bound_boxes_float16.tflite in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				84972C592C90904E00530DC9 /* Montserrat-Regular.ttf in Resources */,
+				843FC47C2C94659F00A922ED /* two_label_v3_float16.tflite in Resources */,
 				6704CC6301183FC1ED3EA171 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843FC4802C947BF500A922ED /* BoundModelDetector.swift in Sources */,
 				84972C4E2C90901800530DC9 /* CIImage+Extension.swift in Sources */,
 				84972C522C90903000530DC9 /* ContentView.swift in Sources */,
 				84972C6E2C90907C00530DC9 /* RatioRectangleView.swift in Sources */,

@@ -12,6 +12,7 @@ struct OCRView: View {
         .alert(isPresented: $OCR.showAlert) {
           Alert(title: Text("Nem található gyári szám!"), message: Text("Kérjük ellenőrizze, hogy a mérőóra teljesen benne van-e a keretben és a gyári szám, valamint a vonalkód jól olvasható!"), dismissButton: .cancel(Text("Újra")) {
             RNData.shared.onCancelPress(["data": "some data"])
+            OCR.torchIsOn = false
             OCR.showAlert = false
           })
         }
@@ -29,8 +30,11 @@ struct OCRView: View {
           else { NoFlashLight(size: 80)
             .frame(width: downSapce, height: downSapce)
           }
-          CloseCameraButton(size: 60, onTap: { RNData.shared.onCancelPress(["data": "some data"]) })
-            .frame(width: downSapce)
+          CloseCameraButton(size: 60, onTap: {
+            OCR.torchIsOn = false
+            RNData.shared.onCancelPress(["data": "some data"])
+          })
+          .frame(width: downSapce)
         }
       }
     }

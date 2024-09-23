@@ -27,6 +27,48 @@ extension ViewController {
         }
         setOnce = 1
       }
+      if OCRResults.count <= 15, statGyariSzam == "done" {
+        //            print("Találat: ", gyariSzamTalalat)
+
+        let imageToProcess = convertImage(sampleBuffer: sampleBuffer, rect: rect)
+
+        runDisplayDetector(imageToProcess: imageToProcess)
+        if predictions.count > 0 {
+          let detectedRect = createScaledCGRect(
+            x1: CGFloat(predictions[0].xyxy.x1),
+            y1: CGFloat(predictions[0].xyxy.y1),
+            x2: CGFloat(predictions[0].xyxy.x2),
+            y2: CGFloat(predictions[0].xyxy.y2),
+            from: 640,
+            to: imageToProcess.size.width)
+          let detectedImageCheck = cropImage(image: imageToProcess, rect: detectedRect)
+          if predictions[0].classIndex == 1 {
+            recognizeText(from: detectedImageCheck)
+          }
+          else if predictions[0].classIndex == 0 {
+            OCRForBlackRed(image: detectedImageCheck)
+          }
+          predictions.removeAll()
+        }
+        //      print("Iteration: ", OCRResults.count)
+      }
+      else if mostFrequentStringWithPercentage(strings: OCRResults) != nil, meroErtek == "" {
+        meroErtek = mostFrequentStringWithPercentage(strings: OCRResults)!.0
+        DispatchQueue.main.async {
+          self.statMero = "done"
+        }
+        //      print(meroErtek)
+        //      print(mostFrequentStringWithPercentage(strings: OCRResults)!.1, " %")
+        let imageToSave = convertImage(sampleBuffer: sampleBuffer, rect: rect)
+        let data = imageToSave.jpegData(compressionQuality: 0.8)
+        let filename = getDocumentsDirectory().appendingPathComponent("mero.png")
+        try? data!.write(to: filename)
+
+        RNData.shared.onSuccess(["meroErtek": meroErtek, "filePath": filename.absoluteString])
+      }
+      else if statMero == "error" {
+        print("Hiba történt a leolvasás során!")
+      }
     }
     else {
 //            print("Hiba történt a gyári szám leolvasása során")
@@ -39,43 +81,6 @@ extension ViewController {
         }
         setOnce = 1
       }
-    }
-    if OCRResults.count <= 15, statGyariSzam == "done" {
-//            print("Találat: ", gyariSzamTalalat)
-
-      let imageToProcess = convertImage(sampleBuffer: sampleBuffer, rect: rect)
-
-      runDisplayDetector(imageToProcess: imageToProcess)
-      if predictions.count != 0 {
-        let detectedRect = createScaledCGRect(
-          x1: CGFloat(predictions[0].xyxy.x1),
-          y1: CGFloat(predictions[0].xyxy.y1),
-          x2: CGFloat(predictions[0].xyxy.x2),
-          y2: CGFloat(predictions[0].xyxy.y2),
-          from: 640,
-          to: imageToProcess.size.width)
-        let detectedImageCheck = cropImage(image: imageToProcess, rect: detectedRect)
-        recognizeText(from: detectedImageCheck)
-        predictions.removeAll()
-      }
-//      print("Iteration: ", OCRResults.count)
-    }
-    else if mostFrequentStringWithPercentage(strings: OCRResults) != nil, meroErtek == "" {
-      meroErtek = mostFrequentStringWithPercentage(strings: OCRResults)!.0
-      DispatchQueue.main.async {
-        self.statMero = "done"
-      }
-//      print(meroErtek)
-//      print(mostFrequentStringWithPercentage(strings: OCRResults)!.1, " %")
-      let imageToSave = convertImage(sampleBuffer: sampleBuffer, rect: rect)
-      let data = imageToSave.jpegData(compressionQuality: 0.8)
-      let filename = getDocumentsDirectory().appendingPathComponent("mero.png")
-      try? data!.write(to: filename)
-
-      RNData.shared.onSuccess(["meroErtek": meroErtek, "filePath": filename.absoluteString])
-    }
-    else if statMero == "error" {
-      print("Hiba történt a leolvasás során!")
     }
   }
 
@@ -109,9 +114,38 @@ extension ViewController {
   }
 
   func cropImage(image: UIImage, rect: CGRect) -> UIImage {
-    let cgImage = image.cgImage!
-    let croppedCGImage = cgImage.cropping(to: rect)
-    return UIImage(cgImage: croppedCGImage!, scale: image.scale, orientation: image.imageOrientation)
+    let cgImage = image.cgImage
+    let croppedCGImage = cgImage?.cropping(to: rect)
+    if croppedCGImage != nil {
+      return UIImage(cgImage: croppedCGImage!, scale: image.scale, orientation: image.imageOrientation)
+    }
+    else
+    { return image }
+  }
+
+  func OCRForBlackRed(image: UIImage) {
+    let visionImage = VisionImage(image: image)
+    textRecognizer!.process(visionImage) { result, error in
+      if let error = error {
+        print("Error recognizing text: \(error)")
+        return
+      }
+      guard let result = result else { return }
+      var exported_text = ""
+      for i in 0 ..< result.text.count {
+        if result.text[i] == "O" || result.text[i] == "o" {
+          exported_text.append("0")
+        }
+        else if result.text[i] == "I" || result.text[i] == "i" {
+          exported_text.append("1")
+        }
+        else if self.alphabets.contains(result.text[i]) {
+          exported_text.append(result.text[i])
+        }
+      }
+
+      self.OCRResults.append(exported_text)
+    }
   }
 
   func getGyariSzam(sampleBuffer: CMSampleBuffer, gyariSzam: String) {
@@ -169,5 +203,18 @@ extension ViewController {
     let percentage = (Double(mostFrequentCount) / Double(totalStrings)) * 100
 
     return (mostFrequentString, percentage)
+  }
+}
+
+extension String {
+  subscript(_ index: Int) -> String {
+    get {
+      String(self[self.index(startIndex, offsetBy: index)])
+    }
+
+    set {
+      remove(at: self.index(startIndex, offsetBy: index))
+      insert(Character(newValue), at: self.index(startIndex, offsetBy: index))
+    }
   }
 }

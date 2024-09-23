@@ -20,7 +20,7 @@ struct FlashLightButton: View {
                 RoundedRectangle(cornerRadius: 100)
                     .frame(width: size, height: size)
                     .foregroundColor(.white)
-                Image(!OCR.torchIsOn ? "flashlightOff" : "flashlightOn")
+                Image(OCR.torchIsOn ? "flashlightOff" : "flashlightOn")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 70)

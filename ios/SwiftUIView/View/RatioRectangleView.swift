@@ -5,7 +5,7 @@ struct RatioRectangleView: View {
     @State private var heightRatio: CGFloat = 1.0
     
     private let cornerLength: CGFloat = 40.0
-    private let borderRadius: CGFloat = 50.0
+    private let borderRadius: CGFloat = 30.0
     private let strokeWidth: CGFloat = 10.0
     
     @ObservedObject var rectangleData = RectangleData.shared
