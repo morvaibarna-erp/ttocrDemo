@@ -170,6 +170,7 @@ class OCRView(
         kwhValue = findViewById(R.id.kwhValue)
 
         torchButton = findViewById(R.id.torchButton)
+
         closeButton = findViewById(R.id.closeButton)
 
         closeButton.setOnClickListener() {
@@ -191,36 +192,6 @@ class OCRView(
             sendEventToReactNative("NoBarCode", dataToSend)
         }
 
-        torchButton.setOnClickListener {
-
-            if (camera!!.cameraInfo.hasFlashUnit() and !isTorchOn) {
-                camera!!.cameraControl.enableTorch(true)
-            } else {
-                camera!!.cameraControl.enableTorch(false)
-            }
-            runOnUiThread {
-                torchButton.animate().apply {
-                    duration = 50
-                    scaleX(0.8f)
-                    scaleY(0.8f)
-                }.withEndAction {
-                    torchButton.animate().apply {
-                        duration = 50
-                        scaleX(1f)
-                        scaleY(1f)
-                    }
-                }.start()
-                if (isTorchOn) {
-                    torchButton.setImageResource(R.drawable.flashlight_off)
-                } else
-                    torchButton.setImageResource(R.drawable.flashlight_on)
-            }
-            isTorchOn = !isTorchOn
-
-
-//
-
-        }
 
         ratioRectangleView.invalidate()
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -229,9 +200,11 @@ class OCRView(
                 toast(it)
             }
         }
+
         startCamera()
         installHierarchyFitter(viewFinder)
         showProgress(1)
+
     }
 
 
@@ -342,7 +315,7 @@ class OCRView(
                     var value = detector?.getResult()
                     if (value != null) {
                         showTick(3)
-                        
+
                         val file = File(
                             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
                             (0..1000).random().toString() + ".jpg"
@@ -413,7 +386,35 @@ class OCRView(
                     camera = cameraProvider.bindToLifecycle(
                         lifecycleOwner, cameraSelector, preview, imageAnalyzer
                     )
-
+                    if (!camera!!.cameraInfo.hasFlashUnit()) {
+                        torchButton.setImageResource(R.drawable.no_flash)
+                    }else{
+                        torchButton.setOnClickListener {
+                            if (camera!!.cameraInfo.hasFlashUnit() and !isTorchOn) {
+                                camera!!.cameraControl.enableTorch(true)
+                            } else {
+                                camera!!.cameraControl.enableTorch(false)
+                            }
+                            runOnUiThread {
+                                torchButton.animate().apply {
+                                    duration = 50
+                                    scaleX(0.8f)
+                                    scaleY(0.8f)
+                                }.withEndAction {
+                                    torchButton.animate().apply {
+                                        duration = 50
+                                        scaleX(1f)
+                                        scaleY(1f)
+                                    }
+                                }.start()
+                                if (isTorchOn) {
+                                    torchButton.setImageResource(R.drawable.flashlight_off)
+                                } else
+                                    torchButton.setImageResource(R.drawable.flashlight_on)
+                            }
+                            isTorchOn = !isTorchOn
+                        }
+                    }
                 }
 //            preview?.setSurfaceProvider(viewFinder.surfaceProvider)
             }
