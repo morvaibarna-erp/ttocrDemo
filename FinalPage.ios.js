@@ -8,23 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import { React, useState } from "react";
-// var RNFS = require("react-native-fs");
-
-// const deleteImage = (path) => {
-//   const filepath = path;
-
-//   RNFS.exists(filepath)
-//     .then((result) => {
-//       if (result) {
-//         return RNFS.unlink(filepath).catch((err) => {
-//           console.log(err.message);
-//         });
-//       }
-//     })
-//     .catch((err) => {
-//       console.log(err.message);
-//     });
-// };
 
 const FinalPage = ({ route, navigation }) => {
   const { allas, gyariSzam, savedImagePath } = route.params;
@@ -56,7 +39,6 @@ const FinalPage = ({ route, navigation }) => {
               title="Újra"
               color={"#ff804e"}
               onPress={() => {
-                deleteImage(savedImagePath);
                 navigation.reset({
                   index: 0,
                   routes: [
@@ -75,7 +57,6 @@ const FinalPage = ({ route, navigation }) => {
               title="Elfogadás (kép törlése)"
               color={"#04c01d"}
               onPress={() => {
-                deleteImage(savedImagePath);
                 navigation.reset({
                   index: 0,
                   routes: [
