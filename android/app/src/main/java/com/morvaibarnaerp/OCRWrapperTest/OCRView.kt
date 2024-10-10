@@ -37,7 +37,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.lifecycle.LifecycleOwner
+//import androidx.lifecycle.ViewTreeLifecycleOwner
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
@@ -378,9 +380,10 @@ class OCRView(
                 }
             }
         }
+
         try {
             Handler(Looper.getMainLooper()).post {
-                val lifecycleOwner = ViewTreeLifecycleOwner.get(this)
+                val lifecycleOwner = findViewTreeLifecycleOwner()
                 if (lifecycleOwner != null) {
                     cameraProvider.unbindAll()
                     camera = cameraProvider.bindToLifecycle(
